@@ -1,0 +1,26 @@
+ion-toolbar{
+    --ion-background-color: transparent;
+    --opacity: 0;
+}
+
+ion-header{
+    position: absolute;
+    text-align: center;
+}
+
+ion-card{
+    box-shadow: none;
+}
+
+ion-card-header{
+    text-align: center;
+}
+
+ion-icon{
+    margin-right: 0.6em;
+}
+
+.sign-up-btn{
+    text-align: center;
+    margin-top: 2em;
+}

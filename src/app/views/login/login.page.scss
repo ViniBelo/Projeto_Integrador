@@ -1,7 +1,3 @@
-ion-content{
-    --ion-background-color: #E1EAF9;
-}
-
 ion-toolbar{
     --ion-background-color: transparent;
     --opacity: 0;
@@ -12,22 +8,18 @@ ion-header{
     text-align: center;
 }
 
-ion-card, ion-img{
-    --ion-background-color: #E1EAF9;
+ion-card{
+    box-shadow: none;
 }
 
 ion-card-header{
     text-align: center;
+
 }
 
 .signin-btns{
     margin-top: 2em;
     text-align: center;
-    color: #F0F4FA;
-}
-
-.loginbtn{
-    --ion-color-primary: #215AB7;
 }
 
 .text-tag{

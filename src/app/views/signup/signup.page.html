@@ -1,9 +1,56 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title>signup</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="login"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content class="bg-color">
+  <ion-card>
+    <ion-img src="assets/images/Joystick.png"> </ion-img>
+    <ion-card-header>
+      <ion-card-title> Registro </ion-card-title>
+      <ion-card-subtitle>
+        Preencha os campos e crie sua conta!
+      </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-icon name="person-outline"></ion-icon>
+        <ion-input
+          type="text"
+          name="name"
+          [(ngModel)]="name"
+          placeholder="Apelido"
+          required
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="mail-outline"></ion-icon>
+        <ion-input
+          type="text"
+          name="email"
+          [(ngModel)]="email"
+          placeholder="Email"
+          required
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="lock-closed-outline"></ion-icon>
+        <ion-input
+          type="password"
+          name="password"
+          [(ngModel)]="password"
+          placeholder="Senha"
+          required
+        ></ion-input>
+      </ion-item>
+      <div class="sign-up-btn">
+        <ion-button shape="round" fill="solid" class="sign-up-btn"
+          >Registrar-se</ion-button
+        >
+      </div>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
