@@ -1,4 +1,6 @@
+import { AlertController } from '@ionic/angular';
 import { Component } from '@angular/core';
+import { getAuth } from 'firebase/auth';
 
 @Component({
   selector: 'app-tab2',
@@ -7,6 +9,20 @@ import { Component } from '@angular/core';
 })
 export class Tab2Page {
 
-  constructor() {}
+  constructor(
+    private alertController: AlertController
+  ) {
+    this.presentAlert('Login', 'BEM-SUCEDIDO!', getAuth().currentUser.displayName)
+  }
 
+  async presentAlert(header: string, subHeader: string, message: string) {
+    const alert = await this.alertController.create({
+      header: header,
+      subHeader: subHeader,
+      message: message,
+      buttons: ['OK'],
+    });
+
+    await alert.present()
+  }
 }

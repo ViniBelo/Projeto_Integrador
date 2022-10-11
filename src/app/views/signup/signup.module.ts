@@ -1,6 +1,7 @@
+import { BrMaskerModule } from 'br-mask';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -12,6 +13,8 @@ import { SignupPage } from './signup.page';
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
+    BrMaskerModule,
     IonicModule,
     SignupPageRoutingModule
   ],

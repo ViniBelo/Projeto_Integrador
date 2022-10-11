@@ -1,5 +1,8 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="login"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -7,42 +10,42 @@
   <ion-card>
     <ion-img src="assets/images/Joystick.png"> </ion-img>
     <ion-card-content>
-      <div class="wrapform">
-        <ion-item>
-          <ion-icon name="mail-outline"></ion-icon>
-          <ion-input
-            type="text"
-            name="email"
-            [(ngModel)]="email"
-            placeholder="Email"
-            required
-          ></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-icon name="lock-closed-outline"></ion-icon>
-          <ion-input
-            type="password"
-            name="password"
-            [(ngModel)]="password"
-            placeholder="Senha"
-            required
-          ></ion-input>
-        </ion-item>
-      </div>
-      <div class="password_forgot">
-        <ion-button fill="clear" class="ion-no-padding"
-          >Esqueceu sua senha?</ion-button
-        >
-      </div>
-      <div class="sign-btn">
-        <ion-button shape="round" fill="solid" class="sign-btn"
-          >Entrar</ion-button
-        >
-      </div>
+      <form [formGroup]="formLogin" (ngSubmit)="submitForm()">
+        <div class="wrapform">
+          <ion-item>
+            <ion-icon name="mail-outline"></ion-icon>
+            <ion-input
+              placeholder="Email"
+              formControlName="email"
+              required
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="lock-closed-outline"></ion-icon>
+            <ion-input
+              type="password"
+              placeholder="Senha"
+              formControlName="password"
+              required
+            ></ion-input>
+          </ion-item>
+        </div>
+        <div class="password_forgot">
+          <ion-button fill="clear" class="ion-no-padding"
+            >Esqueceu sua senha?</ion-button
+          >
+        </div>
+        <div class="sign-btn">
+          <ion-button shape="round" fill="solid" class="sign-btn" type="submit"
+            >Entrar</ion-button
+          >
+        </div>
+      </form>
     </ion-card-content>
   </ion-card>
-  
+
   <div class="ion-card-footer">
-    <span>Ainda não tem uma conta?</span><button class="ion-no-padding">Registre-se</button>
+    <span>Ainda não tem uma conta?</span
+    ><button class="ion-no-padding" (click)="goToSignUp()">Registre-se</button>
   </div>
 </ion-content>

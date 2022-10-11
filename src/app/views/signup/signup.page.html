@@ -16,41 +16,42 @@
       </ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
-      <ion-item>
-        <ion-icon name="person-outline"></ion-icon>
-        <ion-input
-          type="text"
-          name="name"
-          [(ngModel)]="name"
-          placeholder="Apelido"
-          required
-        ></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-icon name="mail-outline"></ion-icon>
-        <ion-input
-          type="text"
-          name="email"
-          [(ngModel)]="email"
-          placeholder="Email"
-          required
-        ></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-icon name="lock-closed-outline"></ion-icon>
-        <ion-input
-          type="password"
-          name="password"
-          [(ngModel)]="password"
-          placeholder="Senha"
-          required
-        ></ion-input>
-      </ion-item>
-      <div class="sign-up-btn">
-        <ion-button shape="round" fill="solid" class="sign-up-btn"
-          >Registrar-se</ion-button
-        >
-      </div>
+      <form [formGroup]="formSignUp" (ngSubmit)="submitForm()">
+        <ion-item>
+          <ion-icon name="person-outline"></ion-icon>
+          <ion-input
+            placeholder="Nome"
+            formControlName="name"
+            required
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="mail-outline"></ion-icon>
+          <ion-input
+            placeholder="Email"
+            formControlName="email"
+            required
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="lock-closed-outline"></ion-icon>
+          <ion-input
+            type="password"
+            placeholder="Senha"
+            formControlName="password"
+            required
+          ></ion-input>
+        </ion-item>
+        <div class="sign-up-btn">
+          <ion-button
+            shape="round"
+            fill="solid"
+            class="sign-up-btn"
+            type="submit"
+            >Registrar-se</ion-button
+          >
+        </div>
+      </form>
     </ion-card-content>
   </ion-card>
 </ion-content>
