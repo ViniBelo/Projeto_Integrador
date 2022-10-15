@@ -21,9 +21,14 @@ const routes: Routes = [
   {
     path: 'loginscreen',
     loadChildren: () => import('./views/loginscreen/loginscreen.module').then( m => m.LoginscreenPageModule)
-  },  {
+  },
+  {
     path: 'user-details',
     loadChildren: () => import('./views/user-details/user-details.module').then( m => m.UserDetailsPageModule)
+  },
+  {
+    path: 'home',
+    loadChildren: () => import('./views/home/home.module').then( m => m.HomePageModule)
   }
 
 

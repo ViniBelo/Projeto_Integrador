@@ -33,6 +33,10 @@ export class LoginscreenPage implements OnInit {
     this.router.navigate(['/signup'])
   }
 
+  goToForgotPassword(){
+    this.router.navigate(['/forgot-password']);
+  }
+
   get errorControl() {
     return this.formLogin.controls
   }
@@ -57,7 +61,7 @@ export class LoginscreenPage implements OnInit {
           console.log(res)
           this.loadingCtrl.dismiss()
           this.presentAlert('Login', 'BEM-SUCEDIDO!', 'Seja bem-vindo!')
-          this.router.navigate(['/tabs/tab2'])
+          this.router.navigate(['/home'])
         }, err => {
           this.loadingCtrl.dismiss()
           this.presentAlert('Cadastro', 'ERRO!', err)
