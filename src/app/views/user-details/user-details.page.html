@@ -6,12 +6,12 @@
 
 <ion-content>
   <ion-list>
-    <form formControlName="formEdit()">
+    <form [formGroup]="formEdit">
       <ion-item>
-        <ion-input placeholder="Nome"></ion-input>
+        <ion-input formControlName="name" placeholder="Nome"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-input placeholder="Email"></ion-input>
+        <ion-input formControlName="email" placeholder="Email"></ion-input>
       </ion-item>
     </form>
   </ion-list>

@@ -1,6 +1,5 @@
 import { getAuth } from 'firebase/auth';
 export class Profile {
-    private _id: string
     private _uid: any
     private _name: string
     private _password: string
@@ -11,11 +10,7 @@ export class Profile {
         this._name = name
         this._email = email
         this._password = password
-        this.setUid
-    }
-
-    public get id() {
-        return this._id
+        this._uid = getAuth().currentUser.uid
     }
 
     public get uid() {
@@ -32,10 +27,6 @@ export class Profile {
 
     public get profileImageURL() {
         return this._profileImageURL
-    }
-
-    public setUid () {
-        this._uid = getAuth().currentUser.uid
     }
 
     public set name(name: string) {

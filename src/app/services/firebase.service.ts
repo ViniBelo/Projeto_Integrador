@@ -27,12 +27,13 @@ export class FirebaseService {
 
   saveDetails(profile: Profile, userId) {
     return this.firestore.collection(this._PATH).doc(userId.uid).set({
+      userId: userId.uid,
       name: profile.name,
       email: profile.email
     })
   }
 
-  getDetails(data) {
-    return this.firestore.collection(this._PATH).doc(data.uid).valueChanges()
+  getDetails(uid: string) {
+    return this.firestore.collection(this._PATH).doc(uid).valueChanges()
   }
 }

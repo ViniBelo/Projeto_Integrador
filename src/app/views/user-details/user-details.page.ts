@@ -12,11 +12,11 @@ import { Profile } from 'src/app/models/profile';
   styleUrls: ['./user-details.page.scss'],
 })
 export class UserDetailsPage implements OnInit {
-  private _profile: Profile
-  private isSubmitted: boolean = false
-  private _edition: boolean = false
-  public formEdit: FormGroup
-
+  private _profile: Profile;
+  private isSubmitted: boolean = false;
+  private _edition: boolean = false;
+  private _data;
+  public formEdit: FormGroup;
 
   constructor(
     private router: Router,
@@ -24,10 +24,25 @@ export class UserDetailsPage implements OnInit {
     private firebaseService: FirebaseService,
     private formBuilder: FormBuilder,
     private loadingCtrl: LoadingController
-  ) { }
+  ) {}
 
   ngOnInit() {
-    
+    this.firebaseService.getDetails(this._profile).subscribe(res => {
+      this._profile = res.map(c => {
+        return {
+          uid: c.payload.doc.uid,
+          ...c.payload.doc.data() as Profile
+        } as Profile
+      })
+    })
+    this.formEdit = this.formBuilder.group({
+      nome: [getAuth().name, [Validators.required]],
+      email: [this.showEmail(), [Validators.required]],
+    })
+  }
+
+  showEmail() {
+    return getAuth().currentUser.email;
   }
 
   async presentAlert(header: string, subHeader: string, message: string) {

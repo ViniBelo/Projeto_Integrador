@@ -5,15 +5,10 @@ import { getAuth } from 'firebase/auth';
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
-  styleUrls: ['tab2.page.scss']
+  styleUrls: ['tab2.page.scss'],
 })
 export class Tab2Page {
-
-  constructor(
-    private alertController: AlertController
-  ) {
-    this.presentAlert('Login', 'BEM-SUCEDIDO!', getAuth().currentUser.displayName)
-  }
+  constructor(private alertController: AlertController) {}
 
   async presentAlert(header: string, subHeader: string, message: string) {
     const alert = await this.alertController.create({
@@ -23,6 +18,6 @@ export class Tab2Page {
       buttons: ['OK'],
     });
 
-    await alert.present()
+    await alert.present();
   }
 }
