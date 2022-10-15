@@ -39,7 +39,7 @@ export class ForgotPasswordPage implements OnInit {
   submitForm() {
     this._isSubmitted = true
     if(!this.formForgot.valid) {
-      this.presentAlert('Login', 'ERRO!', 'Preencha todos os campos!')
+      this.presentAlert('Redefinir Senha', 'ERRO!', 'Preencha o campo de email!')
       return false
     } else{
       this.redefinirSenha()
@@ -67,13 +67,14 @@ export class ForgotPasswordPage implements OnInit {
   }
 
   redefinirSenha(){
+    this.showLoading('Aguarde', 10000)
     this.profile.recoverPassword(this.formForgot.value)
     .then(() => {
       // Password reset email sent!
       // ..
       this.loadingCtrl.dismiss()
-          this.presentAlert('Redefinir Senha', 'BEM-SUCEDIDO!', 'Verifique seu email!')
-          this._router.navigate(['/loginscreen'])
+        this.presentAlert('Redefinir Senha', 'BEM-SUCEDIDO!', 'Verifique seu email!')
+        this._router.navigate(['/loginscreen'])
     })
     .catch((error) => {
       const errorCode = error.code;
