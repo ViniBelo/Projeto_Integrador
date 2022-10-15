@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { FirebaseService } from 'src/app/services/firebase.service';
-import { Profile } from 'src/app/models/profile';;
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { Router } from '@angular/router'
+import { FirebaseService } from 'src/app/services/firebase.service'
+import { Profile } from 'src/app/models/profile'
+import { getAuth, onAuthStateChanged } from "firebase/auth"
 
 @Component({
   selector: 'app-home',
@@ -25,9 +25,9 @@ export class HomePage implements OnInit {
     this.profileFS.getUsers().subscribe(res=>{
       this.profiles = res.map( p =>{
         return{
-          id : p.payload.doc.id,
+          id: p.payload.doc.id,
           ...p.payload.doc.data() as Profile
-        } as Profile;
+        } as unknown as Profile;
       })
     })
   }

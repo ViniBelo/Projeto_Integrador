@@ -61,7 +61,7 @@ export class LoginscreenPage implements OnInit {
           console.log(res)
           this.loadingCtrl.dismiss()
           this.presentAlert('Login', 'BEM-SUCEDIDO!', 'Seja bem-vindo!')
-          this.router.navigate(['/home'])
+          this.router.navigate(['/tabs/home'])
         }, err => {
           this.loadingCtrl.dismiss()
           this.presentAlert('Cadastro', 'ERRO!', err)

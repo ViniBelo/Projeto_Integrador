@@ -39,8 +39,8 @@ export class FirebaseService {
     })
   }
 
-  getDetails(uid: string) {
-    return this.firestore.collection(this._PATH).doc(uid).valueChanges()
+  getDetails(data) {
+    return this.firestore.collection(this._PATH).doc(data.uid).valueChanges()
   }
 
   getUsers(){
