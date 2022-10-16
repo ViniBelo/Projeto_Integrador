@@ -1,0 +1,20 @@
+ion-header, ion-content{
+    text-align: center;
+}
+
+ion-card{
+    --ion-background-color: transparent;
+    box-shadow: none;
+}
+
+ion-card-title{
+    font-size: xx-large;
+    margin-top: 0.6em;
+}
+
+ion-card-subtitle{
+    font-size: x-large;
+    margin-top: 0.6em;
+    margin-left: 0.1em;
+    margin-right: 0.1em;
+}
