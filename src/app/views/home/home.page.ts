@@ -43,7 +43,7 @@ export class HomePage implements OnInit {
       } else {
         // User is signed out
         // ...
-        alert("youre not logged in")
+        alert("You're not logged in")
         this._router.navigate(['/loginscreen'])
       }
     });
@@ -51,7 +51,7 @@ export class HomePage implements OnInit {
 
   async logout(){
     await this.profileFS.logout();
-    this._router.navigate(['/loginscreen'])
+    this._router.navigate(['/login'])
   }
 
 }

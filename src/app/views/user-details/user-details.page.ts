@@ -27,16 +27,16 @@ export class UserDetailsPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    /* this.firebaseService.getDetails(this._profile).subscribe(res => {
+    /*
+    this.firebaseService.getDetails(this._profile).subscribe(res => {
       this._profile = res.map(c => {
         return {
-          uid: c.payload.doc.uid,
+          uid: c.payload.doc.id,
           ...c.payload.doc.data() as Profile
         } as Profile
       })
     })
     */
-    
     this.formEdit = this.formBuilder.group({
       nome: [getAuth().name, [Validators.required]],
       email: [this.showEmail(), [Validators.required]],
