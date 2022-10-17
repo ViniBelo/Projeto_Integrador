@@ -51,7 +51,7 @@ export class HomePage implements OnInit {
 
   async logout(){
     await this.profileFS.logout();
-    this._router.navigate(['/login'])
+    this._router.navigate(['/'])
   }
 
 }
