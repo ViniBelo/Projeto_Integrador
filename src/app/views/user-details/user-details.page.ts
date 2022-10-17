@@ -1,3 +1,4 @@
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { getAuth } from 'firebase/auth';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FirebaseService } from './../../services/firebase.service';
@@ -5,6 +6,7 @@ import { AlertController, LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Profile } from 'src/app/models/profile';
+import { user } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-user-details',
@@ -22,24 +24,15 @@ export class UserDetailsPage implements OnInit {
     private router: Router,
     private alertController: AlertController,
     private firebaseService: FirebaseService,
+    private angularFirestore: AngularFirestore,
     private formBuilder: FormBuilder,
     private loadingCtrl: LoadingController
   ) {}
 
   ngOnInit() {
-    /*
-    this.firebaseService.getDetails(this._profile).subscribe(res => {
-      this._profile = res.map(c => {
-        return {
-          uid: c.payload.doc.id,
-          ...c.payload.doc.data() as Profile
-        } as Profile
-      })
-    })
-    */
     this.formEdit = this.formBuilder.group({
-      nome: [getAuth().name, [Validators.required]],
-      email: [this.showEmail(), [Validators.required]],
+      name: ['name', [Validators.required]],
+      email: ['email', [Validators.required]],
     })
   }
 

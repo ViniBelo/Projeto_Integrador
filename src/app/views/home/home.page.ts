@@ -14,7 +14,8 @@ export class HomePage implements OnInit {
   profiles : Profile[];
   auth = getAuth();
 
-  constructor(private _router : Router, private profileFS: FirebaseService) {
+  constructor(private _router : Router,
+    private profileFS: FirebaseService) {
     this.carregarUsers();
    }
 

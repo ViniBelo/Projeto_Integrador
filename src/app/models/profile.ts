@@ -10,11 +10,10 @@ export class Profile {
         this._name = name
         this._email = email
         this._password = password
-        this._uid = getAuth().currentUser.uid
     }
 
     public get uid() {
-        return this._uid
+        return getAuth().currentUser.uid
     }
 
     public get name() {
