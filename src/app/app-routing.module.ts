@@ -4,6 +4,10 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
+    loadChildren: () => import('./views/login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'tabs',
     loadChildren: () => import('./views/tabs/tabs.module').then(m => m.TabsPageModule)
   },
   {
@@ -13,10 +17,6 @@ const routes: Routes = [
   {
     path: 'forgot-password',
     loadChildren: () => import('./views/forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
-  },
-  {
-    path: 'login',
-    loadChildren: () => import('./views/login/login.module').then( m => m.LoginPageModule)
   },
   {
     path: 'loginscreen',
