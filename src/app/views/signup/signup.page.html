@@ -42,6 +42,13 @@
             required
           ></ion-input>
         </ion-item>
+        <div class="profile-image">
+          Envie uma imagem de perfil!
+          <ion-button size="default" shape="round">
+            <input type="file" formControlName="image" (change)="uploadFile($event.target)" />
+          </ion-button>
+        </div>
+        
         <div class="sign-up-btn">
           <ion-button
             shape="round"

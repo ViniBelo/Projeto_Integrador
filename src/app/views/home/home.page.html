@@ -7,11 +7,10 @@
 <ion-content>
   <ion-list>
     <ion-item *ngFor="let profile of profiles">
-      <ion-avatar></ion-avatar>
+      <ion-avatar>
+        <img src="{{profile.profileImageURL}}" alt="">
+      </ion-avatar>
       <ion-label>{{profile.name}}</ion-label>
     </ion-item>
   </ion-list>
-  <ion-fab-button color="secondary" (click)="checksession()">
-    <ion-icon name="add"></ion-icon>
-  </ion-fab-button>
 </ion-content>

@@ -9,13 +9,20 @@
     <form [formGroup]="formEdit">
       <ion-item>
         <ion-avatar>
-          <img src="../../../assets/images/Joystick.png" alt="">
+          <img [src]="profile.profileImageURL" alt="">
         </ion-avatar>
       </ion-item>
       <ion-item>
+        <ion-button size="default" shape="round">
+          <input type="file" (change)="uploadFile($event.target)"/>
+        </ion-button>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="person-outline"></ion-icon>
         <ion-input formControlName="name" placeholder="Nome"></ion-input>
       </ion-item>
       <ion-item>
+        <ion-icon name="mail-outline"></ion-icon>
         <ion-input formControlName="email" placeholder="Email"></ion-input>
       </ion-item>
       <ion-button (click)="logout()">

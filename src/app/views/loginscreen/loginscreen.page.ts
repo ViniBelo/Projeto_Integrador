@@ -55,10 +55,8 @@ export class LoginscreenPage implements OnInit {
     this.showLoading('Aguarde', 10000)
     this.profile.loginWithEmail(this.formLogin.value)
     .then(res => {
-      console.log(res)
       if(res.user.uid) {
         this.profile.getDetails({uid:res.user.uid}).subscribe(res => {
-          console.log(res)
           this.loadingCtrl.dismiss()
           this.presentAlert('Login', 'BEM-SUCEDIDO!', 'Seja bem-vindo!')
           this.router.navigate(['tabs/tabs/home'])

@@ -28,7 +28,8 @@ export class SignupPage implements OnInit {
     this.formSignUp = this.formBuilder.group({
       name: ['', [Validators.required]],
       email: ['', [Validators.required]],
-      password: ['', [Validators.required]]
+      password: ['', [Validators.required]],
+      image: ['', [Validators.required]]
     })
   }
 
@@ -55,12 +56,12 @@ export class SignupPage implements OnInit {
     this.profile.signUp(this.formSignUp.value)
     .then(res => {
       if(res.user.uid){
-        this.profile.saveDetails(this.formSignUp.value, {uid:res.user.uid})
+        this.profile.enviarImagem(this._image, this.formSignUp.value, {uid:res.user.uid})
         .then(res => {
           this.loadingCtrl.dismiss()
           this.presentAlert('Cadastro', 'BEM-SUCEDIDO!', 'Cadastro realizado com sucesso!')
           this.router.navigate(['/loginscreen'])
-        }, err => {
+        }).catch((err) => {
           this.loadingCtrl.dismiss()
           this.presentAlert('Cadastro', 'ERRO!', err)
           console.log(err)
@@ -68,6 +69,7 @@ export class SignupPage implements OnInit {
       }
     })
   }
+  
   
 
   async presentAlert(header: string, subHeader: string, message: string) {

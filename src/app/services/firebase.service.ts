@@ -3,7 +3,8 @@ import { Injectable } from '@angular/core'
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Profile } from '../models/profile';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { Auth, createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
+import { getAuth, signOut } from '@angular/fire/auth';
+import { finalize } from 'rxjs/operators'
 
 
 
@@ -32,10 +33,12 @@ export class FirebaseService {
   }
 
   saveDetails(profile: Profile, userId) {
-    return this.firestore.collection(this._PATH).doc(userId.uid).set({
-      userId: userId.uid,
+    return this.firestore.collection(this._PATH)
+    .doc(userId.uid)
+    .set({
       name: profile.name,
-      email: profile.email
+      email: profile.email,
+      profileImageURL: profile.profileImageURL
     })
   }
 
@@ -50,6 +53,27 @@ export class FirebaseService {
     return this.firestore
     .collection(this._PATH)
     .snapshotChanges();
+  }
+
+  enviarImagem(imagem: any, profile: Profile, userId) {
+    const file = imagem.item(0)
+    if(file.type.split('/')[0] !== 'image') {
+      console.error('Tipo não suportado!')
+      return
+    }
+    const path = `images/${new Date().getTime()}_${file.name}`
+    const fileRef = this.fireStorage.ref(path)
+    let task = this.fireStorage.upload(path, file)
+    task.snapshotChanges().pipe(
+      finalize(() => {
+        let uploadedFileURL = fileRef.getDownloadURL()
+        uploadedFileURL.subscribe((resp)=>{
+          profile.profileImageURL = resp
+          this.saveDetails(profile, userId)
+        })
+      })
+    ).subscribe()
+    return task
   }
 
   logout(){
