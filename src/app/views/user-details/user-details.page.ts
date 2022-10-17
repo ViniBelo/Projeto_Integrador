@@ -17,7 +17,7 @@ export class UserDetailsPage implements OnInit {
   private _profile: Profile;
   private isSubmitted: boolean = false;
   private _edition: boolean = false;
-  private _data;
+  private _data: any;
   public formEdit: FormGroup;
 
   constructor(
@@ -31,13 +31,19 @@ export class UserDetailsPage implements OnInit {
 
   ngOnInit() {
     this.formEdit = this.formBuilder.group({
-      name: ['name', [Validators.required]],
-      email: ['email', [Validators.required]],
+      name: ['', [Validators.required]],
+      email: ['', [Validators.required]],
+    })
+    this.firebaseService.getDetails(getAuth().currentUser).subscribe(res => {
+      this._data = res
+      this.formEdit.controls['name'].setValue(this._data.name)
+      this.formEdit.controls['email'].setValue(this._data.email)
     })
   }
 
-  showEmail() {
-    return getAuth().currentUser.email;
+  async logout(){
+    await this.firebaseService.logout();
+    this.router.navigate(['/'])
   }
 
   async presentAlert(header: string, subHeader: string, message: string) {

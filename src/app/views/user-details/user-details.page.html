@@ -8,11 +8,20 @@
   <ion-list>
     <form [formGroup]="formEdit">
       <ion-item>
+        <ion-avatar>
+          <img src="../../../assets/images/Joystick.png" alt="">
+        </ion-avatar>
+      </ion-item>
+      <ion-item>
         <ion-input formControlName="name" placeholder="Nome"></ion-input>
       </ion-item>
       <ion-item>
         <ion-input formControlName="email" placeholder="Email"></ion-input>
       </ion-item>
+      <ion-button (click)="logout()">
+        Sair
+        <ion-icon shape="round" slot="icon-only" name="log-out"></ion-icon>
+      </ion-button>
     </form>
   </ion-list>
 </ion-content>
