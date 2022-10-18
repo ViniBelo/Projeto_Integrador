@@ -61,12 +61,14 @@ export class LoginscreenPage implements OnInit {
           this.presentAlert('Login', 'BEM-SUCEDIDO!', 'Seja bem-vindo!')
           this.router.navigate(['tabs/tabs/home'])
         }, err => {
-          this.showLoading('Aguarde', 10000)
           this.loadingCtrl.dismiss()
           this.presentAlert('Login', 'ERRO!', err)
           console.log(err)
         })
       }
+    }).catch((error) => {
+      this.loadingCtrl.dismiss()
+      this.presentAlert("Login", "Erro!", "Email ou senha incorretos!")
     })
   }
 
