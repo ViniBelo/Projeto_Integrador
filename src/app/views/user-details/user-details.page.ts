@@ -34,17 +34,80 @@ export class UserDetailsPage implements OnInit {
     this.formEdit = this.formBuilder.group({
       name: ['', [Validators.required]],
       email: ['', [Validators.required]],
+      lol: ['', Validators.required],
+      steamLink: ['', Validators.required],
       profileImageURL: ['', [Validators.required]]
     })
     this.firebaseService.getDetails(getAuth().currentUser).subscribe(res => {
       this._data = res
       this.profile = this._data
-      console.log(this.profile)
       this.formEdit.controls['name'].setValue(this.profile.name)
       this.formEdit.controls['email'].setValue(this.profile.email)
       this.formEdit.controls['profileImageURL'].setValue(this.profile.profileImageURL)
     })
     
+  }
+
+  editar() {
+    this.showLoading('Aguarde', 10000)
+    
+    if(this._image) {
+      this.firebaseService.editarImagem(this._image,
+        this.formEdit.value)
+        .then(() => {
+          this.firebaseService.excluirImagem(this.profile.profileImageURL)
+          this.loadingCtrl.dismiss()
+          this.presentAlert('Agenda', 'SUCESSO!', 'profile Editado!')
+          this.router.navigate(['/home'])
+        })
+        .catch((error) => {
+          this.loadingCtrl.dismiss()
+          this.presentAlert('Agenda', 'ERRO!', 'Erro ao editar profile!')
+          console.log(error)
+        })
+    } else {
+      this.firebaseService.editDetails(this.formEdit.value)
+        .then(() => {
+          this.loadingCtrl.dismiss()
+          this.presentAlert('Agenda', 'SUCESSO!', 'profile Editado!')
+          this.router.navigate(['/home'])
+        })
+        .catch((error) => {
+          this.loadingCtrl.dismiss()
+          this.presentAlert('Agenda', 'ERRO!', 'Erro ao editar profile!')
+          console.log(error)
+        })
+    }
+  }
+
+  submitForm() {
+    this.isSubmitted = true
+    if(!this.formEdit.valid) {
+      this.presentAlert('Agenda', 'ERRO!', 'Todos os campos são obrigatórios')
+      return false
+    } else{
+      this.editar()
+    }
+  }
+
+  excluir() {
+    this.presentAlertConfirm(
+      'Agenda',
+      'Excluir contato',
+      'Você realmente deseja excluir o contato?'
+    )
+  }
+
+  private deleteProfile(profile: Profile) {
+    this.firebaseService.excluirContato(profile)
+    .then(() => {
+      this.presentAlert('Agenda', 'Excluir', 'Exclusao realizada!')
+      this.router.navigate(['/home'])
+    })
+    .catch((error) => {
+      this.presentAlert('Agenda', 'Excluir', 'Contato não encontrado!')
+      console.log(error)
+    })
   }
 
   uploadFile(image: any) {
@@ -62,6 +125,34 @@ export class UserDetailsPage implements OnInit {
       subHeader: subHeader,
       message: message,
       buttons: ['OK'],
+    });
+
+    await alert.present();
+  }
+
+  async presentAlertConfirm(
+    header: string,
+    subHeader: string,
+    message: string
+  ) {
+    const alert = await this.alertController.create({
+      header: header,
+      subHeader: subHeader,
+      message: message,
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {},
+        },
+        {
+          text: 'OK',
+          role: 'confirm',
+          handler: () => {
+            this.deleteProfile(this.profile);
+          },
+        },
+      ],
     });
 
     await alert.present();

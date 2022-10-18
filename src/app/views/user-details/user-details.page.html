@@ -6,7 +6,7 @@
 
 <ion-content>
   <ion-list>
-    <form [formGroup]="formEdit">
+    <form [formGroup]="formEdit" (ngSubmit)="submitForm()">
       <ion-item>
         <ion-avatar>
           <img [src]="profile.profileImageURL" alt="">
@@ -33,6 +33,8 @@
         <ion-icon src="/src/assets/icon/lol.png"></ion-icon>
         <ion-input formControlName="lol" placeholder="League of Legends"></ion-input>
       </ion-item>
+      <ion-button expand="block" type="submit">Salvar</ion-button>
+      <ion-button expand="block" (click)="excluir()" color="danger">Excluir</ion-button>
       <ion-button (click)="logout()">
         Sair
         <ion-icon shape="round" slot="icon-only" name="log-out"></ion-icon>

@@ -36,14 +36,16 @@ export class FirebaseService {
     return this.firestore.collection(this._PATH).doc(userId.uid).set({
       userId: userId.uid,
       name: profile.name,
-      email: profile.email
+      email: profile.email,
+      lol: '',
+      steamLink: ''
     })
   }
 
-  editarContato(profile : Profile, id : string){
+  editDetails(profile : Profile){
     return this.firestore
     .collection(this._PATH)
-    .doc(id)
+    .doc(profile.uid)
     .update({name : profile.name,
       email : profile.email,
       steamLink : profile.steamLink,
@@ -69,6 +71,43 @@ export class FirebaseService {
     .collection(this._PATH, ref => ref.where("uid", "==", data.uid))
     .snapshotChanges();
   }  
+
+  atualizarImagem(profile: Profile) {
+    return this.firestore.collection(this._PATH).doc(profile.uid).update({
+      profileImageURL: profile.profileImageURL
+    })
+  }
+
+  excluirImagem(profileImageURL: any) {
+    return this.fireStorage.storage.refFromURL(profileImageURL).delete()
+  }
+
+  excluirContato(profile: Profile){
+    this.excluirImagem(profile.profileImageURL)
+    return this.firestore.collection(this._PATH).doc(profile.uid).delete()
+  }
+
+  editarImagem(imagem:any, profile: Profile){
+    const file = imagem.item(0)
+    if(file.type.split('/')[0] !== 'image'){
+      console.error("Tipo não suportado")
+      return
+    }
+    const path = `images/${new Date().getTime()}_${file.name}`
+    const fileRef = this.fireStorage.ref(path)
+    let task = this.fireStorage.upload(path, file)
+    task.snapshotChanges().pipe(
+      finalize(() => {
+        let uploadedFile = fileRef.getDownloadURL()
+        uploadedFile.subscribe(resp => {
+          profile.profileImageURL = resp
+          this.editDetails(profile)
+          this.atualizarImagem(profile)
+        })
+      })
+    ).subscribe()
+    return task
+  }
 
   enviarImagem(imagem: any, profile: Profile, userId) {
     const file = imagem.item(0)
