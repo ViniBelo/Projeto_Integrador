@@ -34,7 +34,9 @@ export class UserDetailsPage implements OnInit {
     this.formEdit = this.formBuilder.group({
       name: ['', [Validators.required]],
       email: ['', [Validators.required]],
-      profileImageURL: ['', [Validators.required]]
+      profileImageURL: ['', [Validators.required]],
+      lol: [''],
+      steamLink: ['']
     })
     this.firebaseService.getDetails(getAuth().currentUser).subscribe(res => {
       this._data = res
@@ -42,6 +44,8 @@ export class UserDetailsPage implements OnInit {
       this.formEdit.controls['name'].setValue(this.profile.name)
       this.formEdit.controls['email'].setValue(this.profile.email)
       this.formEdit.controls['profileImageURL'].setValue(this.profile.profileImageURL)
+      this.formEdit.controls['lol'].setValue(this.profile.lol)
+      this.formEdit.controls['steamLink'].setValue(this.profile.steamLink)
     })
     
   }
@@ -53,26 +57,27 @@ export class UserDetailsPage implements OnInit {
       this.firebaseService.editarImagem(this._image,
         this.formEdit.value)
         .then(() => {
+          
           this.firebaseService.excluirImagem(this.profile.profileImageURL)
           this.loadingCtrl.dismiss()
-          this.presentAlert('Agenda', 'SUCESSO!', 'profile Editado!')
-          this.router.navigate(['/home'])
+          this.presentAlert('Perfil', 'SUCESSO!', 'profile Editado!')
+          this.router.navigate(['/tabs/tabs/home'])
         })
         .catch((error) => {
           this.loadingCtrl.dismiss()
-          this.presentAlert('Agenda', 'ERRO!', 'Erro ao editar profile!')
+          this.presentAlert('Perfil', 'ERRO!', 'Erro ao editar perfil!')
           console.log(error)
         })
     } else {
       this.firebaseService.editDetails(this.formEdit.value)
         .then(() => {
           this.loadingCtrl.dismiss()
-          this.presentAlert('Agenda', 'SUCESSO!', 'profile Editado!')
-          this.router.navigate(['/home'])
+          this.presentAlert('Perfil', 'SUCESSO!', 'profile Editado!')
+          this.router.navigate(['/tabs/tabs/home'])
         })
         .catch((error) => {
           this.loadingCtrl.dismiss()
-          this.presentAlert('Agenda', 'ERRO!', 'Erro ao editar profile!')
+          this.presentAlert('Perfil', 'ERRO!', 'Erro ao editar profile!')
           console.log(error)
         })
     }
@@ -81,7 +86,7 @@ export class UserDetailsPage implements OnInit {
   submitForm() {
     this.isSubmitted = true
     if(!this.formEdit.valid) {
-      this.presentAlert('Agenda', 'ERRO!', 'Todos os campos são obrigatórios')
+      this.presentAlert('Perfil', 'ERRO!', 'Todos os campos são obrigatórios')
       return false
     } else{
       this.editar()
@@ -90,7 +95,7 @@ export class UserDetailsPage implements OnInit {
 
   excluir() {
     this.presentAlertConfirm(
-      'Agenda',
+      'Perfil',
       'Excluir contato',
       'Você realmente deseja excluir o contato?'
     )
@@ -99,11 +104,11 @@ export class UserDetailsPage implements OnInit {
   private deleteProfile(profile: Profile) {
     this.firebaseService.excluirContato(profile)
     .then(() => {
-      this.presentAlert('Agenda', 'Excluir', 'Exclusao realizada!')
-      this.router.navigate(['/home'])
+      this.presentAlert('Perfil', 'Excluir', 'Exclusao realizada!')
+      this.router.navigate(['/tabs/tabs/home'])
     })
     .catch((error) => {
-      this.presentAlert('Agenda', 'Excluir', 'Contato não encontrado!')
+      this.presentAlert('Perfil', 'Excluir', 'Contato não encontrado!')
       console.log(error)
     })
   }

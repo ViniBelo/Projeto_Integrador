@@ -42,15 +42,29 @@ export class FirebaseService {
     })
   }
 
+  editLol(profile: Profile) {
+    return this.firestore
+    .collection(this._PATH)
+    .doc(getAuth().currentUser.uid)
+    .update({lol: profile.lol});
+  }
+
+  editSteam(profile: Profile) {
+    return this.firestore
+    .collection(this._PATH)
+    .doc(getAuth().currentUser.uid)
+    .update({steamLink: profile.steamLink});
+  }
+
   editDetails(profile : Profile){
     return this.firestore
     .collection(this._PATH)
-    .doc(profile.uid)
+    .doc(getAuth().currentUser.uid)
     .update({name : profile.name,
       email : profile.email,
-      steamLink : profile.steamLink,
-      lol : profile.lol,
-      profileImageURL : profile.profileImageURL});
+      profileImageURL : profile.profileImageURL,
+      lol: profile.lol,
+      steamLink: profile.steamLink});
    };
 
   getDetails(data) {
@@ -73,7 +87,7 @@ export class FirebaseService {
   }  
 
   atualizarImagem(profile: Profile) {
-    return this.firestore.collection(this._PATH).doc(profile.uid).update({
+    return this.firestore.collection(this._PATH).doc(getAuth().currentUser.uid).update({
       profileImageURL: profile.profileImageURL
     })
   }
@@ -84,7 +98,7 @@ export class FirebaseService {
 
   excluirContato(profile: Profile){
     this.excluirImagem(profile.profileImageURL)
-    return this.firestore.collection(this._PATH).doc(profile.uid).delete()
+    return this.firestore.collection(this._PATH).doc(getAuth().currentUser.uid).delete()
   }
 
   editarImagem(imagem:any, profile: Profile){
