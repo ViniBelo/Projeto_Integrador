@@ -102,7 +102,7 @@ export class UserDetailsPage implements OnInit {
   }
 
   private deleteProfile(profile: Profile) {
-    this.firebaseService.excluirContato(profile)
+    this.firebaseService.excluirPerfil(profile)
     .then(() => {
       this.presentAlert('Perfil', 'Excluir', 'Exclusao realizada!')
       this.router.navigate(['/'])

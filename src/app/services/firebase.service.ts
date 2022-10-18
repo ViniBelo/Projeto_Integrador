@@ -28,6 +28,10 @@ export class FirebaseService {
     return this.auth.createUserWithEmailAndPassword(profile.email, profile.password)
   }
 
+  deleteUser(profile: Profile) {
+    return getAuth().currentUser.delete()
+  }
+
   recoverPassword(profile : Profile){
     return this.auth.sendPasswordResetEmail(profile.email);
   }
@@ -82,8 +86,9 @@ export class FirebaseService {
     return this.fireStorage.storage.refFromURL(profileImageURL).delete()
   }
 
-  excluirContato(profile: Profile){
+  excluirPerfil(profile: Profile){
     this.excluirImagem(profile.profileImageURL)
+    this.deleteUser(profile)
     return this.firestore.collection(this._PATH).doc(getAuth().currentUser.uid).delete()
   }
 
