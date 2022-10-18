@@ -58,10 +58,12 @@ export class SignupPage implements OnInit {
       if(res.user.uid){
         this.profile.enviarImagem(this._image, this.formSignUp.value, {uid:res.user.uid})
         .then(res => {
+          this.showLoading('Aguarde', 10)
           this.loadingCtrl.dismiss()
           this.presentAlert('Cadastro', 'BEM-SUCEDIDO!', 'Cadastro realizado com sucesso!')
           this.router.navigate(['/loginscreen'])
         }).catch((err) => {
+          this.showLoading('Aguarde', 10)
           this.loadingCtrl.dismiss()
           this.presentAlert('Cadastro', 'ERRO!', err)
           console.log(err)

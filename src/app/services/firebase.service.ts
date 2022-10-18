@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core'
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Profile } from '../models/profile';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { getAuth, signOut } from '@angular/fire/auth';
+import { getAuth, signOut, user } from '@angular/fire/auth';
 import { finalize } from 'rxjs/operators'
 
 
@@ -148,12 +148,9 @@ export class FirebaseService {
   }
 
   logout(){
-    const auth = getAuth();
-    signOut(auth).then(() => {
-    // Sign-out successful.
-    }).catch((error) => {
-        // An error happened.
-        console.log(error);
-      });
+    this.auth.signOut().then(() => {
+      console.log('Signed out')
+    })
   }
+
 }
