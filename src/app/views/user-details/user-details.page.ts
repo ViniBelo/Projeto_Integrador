@@ -47,7 +47,6 @@ export class UserDetailsPage implements OnInit {
       this.formEdit.controls['lol'].setValue(this.profile.lol)
       this.formEdit.controls['steamLink'].setValue(this.profile.steamLink)
     })
-    
   }
 
   editar() {
@@ -57,13 +56,14 @@ export class UserDetailsPage implements OnInit {
       this.firebaseService.editarImagem(this._image,
         this.formEdit.value)
         .then(() => {
-          
+          this.showLoading('Aguarde', 10)
           this.firebaseService.excluirImagem(this.profile.profileImageURL)
           this.loadingCtrl.dismiss()
           this.presentAlert('Perfil', 'SUCESSO!', 'Perfil editado!')
           this.router.navigate(['/tabs/tabs/home'])
         })
         .catch((error) => {
+          this.showLoading('Aguarde', 10)
           this.loadingCtrl.dismiss()
           this.presentAlert('Perfil', 'ERRO!', 'Erro ao editar perfil!')
           console.log(error)
@@ -71,13 +71,15 @@ export class UserDetailsPage implements OnInit {
     } else {
       this.firebaseService.editDetails(this.formEdit.value)
         .then(() => {
+          this.showLoading('Aguarde', 10)
           this.loadingCtrl.dismiss()
           this.presentAlert('Perfil', 'SUCESSO!', 'profile Editado!')
           this.router.navigate(['/tabs/tabs/home'])
         })
         .catch((error) => {
+          this.showLoading('Aguarde', 10)
           this.loadingCtrl.dismiss()
-          this.presentAlert('Perfil', 'ERRO!', 'Erro ao editar profile!')
+          this.presentAlert('Perfil', 'ERRO!', 'Erro ao editar perfil!')
           console.log(error)
         })
     }
@@ -86,7 +88,7 @@ export class UserDetailsPage implements OnInit {
   submitForm() {
     this.isSubmitted = true
     if(!this.formEdit.valid) {
-      this.presentAlert('Perfil', 'ERRO!', 'Todos os campos são obrigatórios')
+      this.presentAlert('Perfil', 'ERRO!', 'Preencha os campos obrigatórios')
       return false
     } else{
       this.editar()
