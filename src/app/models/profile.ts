@@ -4,6 +4,8 @@ export class Profile {
     private _name: string
     private _password: string
     private _email: string
+    private _steamLink : string;
+    private _lol : string;
     private _profileImageURL: any
 
     constructor(name: string, email: string, password: string) {
@@ -28,6 +30,14 @@ export class Profile {
         return this._profileImageURL
     }
 
+    public get steamLink() {
+        return this._steamLink
+    }
+
+    public get lol() {
+        return this._lol
+    }
+
     public set name(name: string) {
         this._name = name
     }
@@ -42,5 +52,13 @@ export class Profile {
 
     public set profileImageURL(profileImageURL: any) {
         this._profileImageURL = profileImageURL
+    }
+    
+    public set lol(lol : string){
+        this._lol = lol;
+    }
+
+    public set steamLink(steamLink : string){
+        this._steamLink = steamLink;
     }
 }

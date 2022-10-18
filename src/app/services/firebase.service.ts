@@ -12,7 +12,7 @@ import { finalize } from 'rxjs/operators'
   providedIn: 'root'
 })
 export class FirebaseService {
-  private _PATH: string = 'profile'
+  private _PATH: string = 'profile';
 
   constructor(
     public firestore: AngularFirestore,
@@ -33,14 +33,23 @@ export class FirebaseService {
   }
 
   saveDetails(profile: Profile, userId) {
-    return this.firestore.collection(this._PATH)
-    .doc(userId.uid)
-    .set({
+    return this.firestore.collection(this._PATH).doc(userId.uid).set({
+      userId: userId.uid,
       name: profile.name,
-      email: profile.email,
-      profileImageURL: profile.profileImageURL
+      email: profile.email
     })
   }
+
+  editarContato(profile : Profile, id : string){
+    return this.firestore
+    .collection(this._PATH)
+    .doc(id)
+    .update({name : profile.name,
+      email : profile.email,
+      steamLink : profile.steamLink,
+      lol : profile.lol,
+      profileImageURL : profile.profileImageURL});
+   };
 
   getDetails(data) {
     return this.firestore
@@ -54,6 +63,12 @@ export class FirebaseService {
     .collection(this._PATH)
     .snapshotChanges();
   }
+
+  readUsers(data) {
+    return this.firestore
+    .collection(this._PATH, ref => ref.where("uid", "==", data.uid))
+    .snapshotChanges();
+  }  
 
   enviarImagem(imagem: any, profile: Profile, userId) {
     const file = imagem.item(0)
