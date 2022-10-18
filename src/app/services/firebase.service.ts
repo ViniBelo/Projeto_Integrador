@@ -34,9 +34,9 @@ export class FirebaseService {
 
   saveDetails(profile: Profile, userId) {
     return this.firestore.collection(this._PATH).doc(userId.uid).set({
-      userId: userId.uid,
       name: profile.name,
       email: profile.email,
+      profileImageURL: profile.profileImageURL,
       lol: '',
       steamLink: ''
     })

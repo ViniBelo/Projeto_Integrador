@@ -34,8 +34,6 @@ export class UserDetailsPage implements OnInit {
     this.formEdit = this.formBuilder.group({
       name: ['', [Validators.required]],
       email: ['', [Validators.required]],
-      lol: ['', Validators.required],
-      steamLink: ['', Validators.required],
       profileImageURL: ['', [Validators.required]]
     })
     this.firebaseService.getDetails(getAuth().currentUser).subscribe(res => {
