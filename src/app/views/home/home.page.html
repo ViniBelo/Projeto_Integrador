@@ -5,12 +5,21 @@
 </ion-header>
 
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-list>
     <ion-item *ngFor="let profile of profiles">
       <ion-avatar>
         <img src="{{profile.profileImageURL}}" alt="">
       </ion-avatar>
       <ion-label>{{profile.name}}</ion-label>
+      <ion-button (click)="presentPopover($event)">
+        <ion-icon slot="start" name="logo-steam"></ion-icon>
+      </ion-button>
+      <p>{{ profile.steamLink }}</p>
+      <ion-button (click)="presentPopover($event)">LoL</ion-button>
+      <p>{{ profile.lol }}</p>
     </ion-item>
   </ion-list>
 </ion-content>

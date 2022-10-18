@@ -30,4 +30,13 @@ export class HomePage implements OnInit {
       });
     });
   }
+
+  doRefresh(event) {
+    this.carregarUsers();
+    
+    setTimeout(() => {
+      event.target.complete();
+    }, 5);
+  }
+  
 }
