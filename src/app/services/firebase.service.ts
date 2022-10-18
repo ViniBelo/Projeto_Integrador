@@ -150,10 +150,10 @@ export class FirebaseService {
   logout(){
     const auth = getAuth();
     signOut(auth).then(() => {
-    // Sign-out successful.
     }).catch((error) => {
         // An error happened.
         console.log(error);
       });
   }
+
 }

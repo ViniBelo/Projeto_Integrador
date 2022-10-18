@@ -72,6 +72,7 @@ export class ForgotPasswordPage implements OnInit {
     .then(() => {
       // Password reset email sent!
       // ..
+      this.showLoading('Aguarde', 10)
       this.loadingCtrl.dismiss()
         this.presentAlert('Redefinir Senha', 'BEM-SUCEDIDO!', 'Verifique seu email!')
         this._router.navigate(['/loginscreen'])

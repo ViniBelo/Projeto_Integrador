@@ -120,7 +120,8 @@ export class UserDetailsPage implements OnInit {
   }
 
   async logout(){
-    await this.firebaseService.logout();
+    this.firebaseService.logout();
+    
     this.router.navigate(['/'])
   }
 

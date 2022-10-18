@@ -56,19 +56,22 @@ export class LoginscreenPage implements OnInit {
     this.profile.loginWithEmail(this.formLogin.value)
     .then(res => {
       if(res.user.uid) {
+        this.showLoading('Aguarde', 10)
         this.profile.getDetails({uid:res.user.uid}).subscribe(res => {
           this.loadingCtrl.dismiss()
           this.presentAlert('Login', 'BEM-SUCEDIDO!', 'Seja bem-vindo!')
           this.router.navigate(['tabs/tabs/home'])
         }, err => {
+          this.showLoading('Aguarde', 10)
           this.loadingCtrl.dismiss()
-          this.presentAlert('Login', 'ERRO!', err)
+          this.presentAlert('Cadastro', 'ERRO!', err)
           console.log(err)
         })
       }
-    }).catch((error) => {
+    }).catch((error)=>{
+      this.showLoading('Aguarde', 10)
       this.loadingCtrl.dismiss()
-      this.presentAlert("Login", "Erro!", "Email ou senha incorretos!")
+      this.presentAlert("Login", "Erro", "Email ou senha incorretos");
     })
   }
 
