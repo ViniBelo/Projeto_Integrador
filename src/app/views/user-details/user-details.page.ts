@@ -57,13 +57,14 @@ export class UserDetailsPage implements OnInit {
       this.firebaseService.editarImagem(this._image,
         this.formEdit.value)
         .then(() => {
-          
+          this.showLoading('Aguarde', 10)
           this.firebaseService.excluirImagem(this.profile.profileImageURL)
           this.loadingCtrl.dismiss()
           this.presentAlert('Perfil', 'SUCESSO!', 'Perfil editado!')
           this.router.navigate(['/tabs/tabs/home'])
         })
         .catch((error) => {
+          this.showLoading('Aguarde', 10)
           this.loadingCtrl.dismiss()
           this.presentAlert('Perfil', 'ERRO!', 'Erro ao editar perfil!')
           console.log(error)
@@ -71,11 +72,13 @@ export class UserDetailsPage implements OnInit {
     } else {
       this.firebaseService.editDetails(this.formEdit.value)
         .then(() => {
+          this.showLoading('Aguarde', 10)
           this.loadingCtrl.dismiss()
           this.presentAlert('Perfil', 'SUCESSO!', 'profile Editado!')
           this.router.navigate(['/tabs/tabs/home'])
         })
         .catch((error) => {
+          this.showLoading('Aguarde', 10)
           this.loadingCtrl.dismiss()
           this.presentAlert('Perfil', 'ERRO!', 'Erro ao editar profile!')
           console.log(error)

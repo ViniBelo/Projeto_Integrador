@@ -52,7 +52,6 @@ export class FirebaseService {
     .doc(getAuth().currentUser.uid)
     .update({name : profile.name,
       email : profile.email,
-      profileImageURL : profile.profileImageURL,
       steamLink: profile.steamLink,
       lol: profile.lol});
    };
