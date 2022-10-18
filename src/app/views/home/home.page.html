@@ -14,12 +14,8 @@
         <img src="{{profile.profileImageURL}}" alt="">
       </ion-avatar>
       <ion-label>{{profile.name}}</ion-label>
-      <ion-button (click)="presentPopover($event)">
-        <ion-icon slot="start" name="logo-steam"></ion-icon>
-      </ion-button>
-      <p>{{ profile.steamLink }}</p>
-      <ion-button (click)="presentPopover($event)">LoL</ion-button>
-      <p>{{ profile.lol }}</p>
+      <ion-label><ion-icon slot="end" name="logo-steam"></ion-icon> {{profile.steamLink}}</ion-label>
+      <ion-label>LoL {{profile.lol}}</ion-label>
     </ion-item>
   </ion-list>
 </ion-content>
