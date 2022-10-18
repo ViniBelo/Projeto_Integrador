@@ -60,7 +60,7 @@ export class UserDetailsPage implements OnInit {
           
           this.firebaseService.excluirImagem(this.profile.profileImageURL)
           this.loadingCtrl.dismiss()
-          this.presentAlert('Perfil', 'SUCESSO!', 'profile Editado!')
+          this.presentAlert('Perfil', 'SUCESSO!', 'Perfil editado!')
           this.router.navigate(['/tabs/tabs/home'])
         })
         .catch((error) => {
@@ -96,8 +96,8 @@ export class UserDetailsPage implements OnInit {
   excluir() {
     this.presentAlertConfirm(
       'Perfil',
-      'Excluir contato',
-      'Você realmente deseja excluir o contato?'
+      'Excluir conta',
+      'Você realmente deseja excluir sua conta?'
     )
   }
 
@@ -105,7 +105,7 @@ export class UserDetailsPage implements OnInit {
     this.firebaseService.excluirContato(profile)
     .then(() => {
       this.presentAlert('Perfil', 'Excluir', 'Exclusao realizada!')
-      this.router.navigate(['/tabs/tabs/home'])
+      this.router.navigate(['/'])
     })
     .catch((error) => {
       this.presentAlert('Perfil', 'Excluir', 'Contato não encontrado!')
