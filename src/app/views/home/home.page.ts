@@ -38,5 +38,5 @@ export class HomePage implements OnInit {
       event.target.complete();
     }, 5);
   }
-  
+
 }
